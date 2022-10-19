@@ -1,0 +1,49 @@
+#importando bibliotecas
+import requests
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
+from time import sleep
+import pyautogui
+import os
+
+#definindo navegador e optando por mostrar as ações feitas durante a automação
+options = Options()
+options.headless = False #Executar de forma visível ou oculta
+navegador = webdriver.Chrome(options=options)
+
+#definindo variável com link da página e abrindo a página no navegador
+link = "coloque aqui o link da página"
+navegador.get(url=link)
+sleep(3)
+
+#inserindo usuário e senha
+inputUsuario = navegador.find_element(by=By.ID, value="usuaLogin")
+inputUsuario.send_keys("digite aqui o usuário")
+sleep(3)
+inputSenha = navegador.find_element(by=By.ID, value="usuaSenha")
+inputSenha.send_keys("digite aqui a senha")
+sleep(3)
+buttonLogin = navegador.find_element(by=By.NAME, value="submit")
+buttonLogin.click()
+sleep(10)
+
+#navegador em tela cheia, e movendo o mouse para selecionar o arquivo desejado
+pyautogui.hotkey('win','up')
+pyautogui.moveTo(392,131)
+pyautogui.sleep(2)
+pyautogui.moveTo(408,163)
+pyautogui.sleep(2)
+pyautogui.moveTo(684,308)
+pyautogui.click()
+pyautogui.sleep(30)
+downloadDoArquivo = navegador.find_element(by=By.ID, value="btnFiltrar")
+pyautogui.sleep(10)
+downloadDoArquivo.click()
+pyautogui.sleep(120)
+
+#arquivo apagado na pasta de destino.
+os.remove('digite aqui a pasta e o nome do arquivo')
+
+#arquivo apagado da pasta 'Download' e enviado para a pasta de destino final
+os.rename('digite aqui o local do arquivo baixado(provavelmente pasta Downloads) e o nome do arquivo ','digite aqui a pasta destino do arquivo, e o nome que deseja salvar o arquivo')
